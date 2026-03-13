@@ -1,36 +1,181 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# JobTracker
 
-## Getting Started
+JobTracker é uma aplicação simples para **organizar e acompanhar candidaturas de emprego**.
+O objetivo do projeto é permitir que o usuário registre vagas, acompanhe o status do processo seletivo e mantenha anotações importantes sobre cada candidatura.
 
-First, run the development server:
+O projeto foi desenvolvido como prática de **Next.js com API routes e Prisma**, utilizando um banco SQLite para persistência de dados.
+
+---
+
+## 🚀 Tecnologias Utilizadas
+
+* **Next.js** – Framework React para frontend e backend
+* **React** – Interface do usuário
+* **Prisma ORM** – Acesso e gerenciamento do banco de dados
+* **SQLite** – Banco de dados local
+* **TailwindCSS** – Estilização da interface
+* **shadcn/ui** – Componentes de interface
+* **Sonner** – Sistema de notificações (toast)
+* **Lucide Icons** – Ícones
+
+---
+
+## 📌 Funcionalidades
+
+* Adicionar novas candidaturas
+* Listar todas as vagas cadastradas
+* Definir status da candidatura
+* Adicionar link da vaga
+* Adicionar notas sobre o processo seletivo
+* Validação de formulário
+* Notificações de sucesso ou erro
+* Ordenação por data de criação
+
+---
+
+## 📊 Estrutura de Dados
+
+Modelo principal utilizado no banco:
+
+```ts
+model Job {
+  id        String   @id @default(uuid())
+  company   String
+  role      String
+  status    String
+  link      String?
+  notes     String?
+  createdAt DateTime @default(now())
+}
+```
+
+---
+
+## ⚙️ Instalação
+
+Clone o repositório:
+
+```bash
+git clone https://github.com/seu-usuario/jobtracker.git
+```
+
+Entre na pasta do projeto:
+
+```bash
+cd jobtracker
+```
+
+Instale as dependências:
+
+```bash
+npm install
+```
+
+---
+
+## 🗄 Configuração do Banco
+
+Gerar o cliente Prisma:
+
+```bash
+npx prisma generate
+```
+
+Criar o banco de dados e aplicar as migrations:
+
+```bash
+npx prisma migrate dev
+```
+
+---
+
+## ▶️ Executar o Projeto
+
+Inicie o servidor de desenvolvimento:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+O projeto estará disponível em:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 📡 API
 
-To learn more about Next.js, take a look at the following resources:
+A aplicação possui rotas de API integradas ao Next.js.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Listar vagas
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+GET /api/jobs
+```
 
-## Deploy on Vercel
+### Criar nova vaga
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+POST /api/jobs
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Body:
+
+```json
+{
+  "company": "Google",
+  "role": "Software Engineer",
+  "status": "applied",
+  "link": "https://jobs.google.com",
+  "notes": "Enviar portfólio junto"
+}
+```
+
+---
+
+## 📁 Estrutura Simplificada
+
+```
+/app
+  /api
+    /jobs
+      route.ts
+  page.tsx
+
+/lib
+  prisma.ts
+
+/prisma
+  schema.prisma
+```
+
+---
+
+## 🎯 Objetivo do Projeto
+
+Este projeto foi desenvolvido como exercício prático para:
+
+* Trabalhar com **Next.js fullstack**
+* Utilizar **Prisma ORM**
+* Criar **APIs simples**
+* Implementar **validação e feedback de UI**
+* Praticar **organização de código em aplicações modernas**
+
+---
+
+## 📌 Melhorias Futuras
+
+* Edição de vagas
+* Remoção de candidaturas
+* Filtros por status
+* Busca por empresa ou cargo
+* Dashboard com estatísticas
+* Autenticação de usuário
+
+---
+
+## 👨‍💻 Autor
+
+Lucas Ladeira
